@@ -5,9 +5,11 @@ using UnityEngine;
 public class Ball : MonoBehaviour {
     private float speed = 20.0f;
     private GameObject bar;
+    private GameManager gms;
 	// Use this for initialization
 	void Start () {
         bar = GameObject.Find("bar");
+        gms = GameObject.Find("GameManager").GetComponent<GameManager>();
         this.GetComponent<Rigidbody>().AddForce((-transform.up) * speed, ForceMode.VelocityChange);
 	}
 	
@@ -27,6 +29,7 @@ public class Ball : MonoBehaviour {
         if (collision.gameObject.tag == "Block")
         {
             Destroy(collision.gameObject);
+            gms.DoBlockDec();
         }
     }
 }
